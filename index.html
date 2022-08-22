@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Brent Martin's Pokemon Game</title>
+<style type="text/css">
+	body {
+		background-image: url("https://www.desktopbackground.org/download/1920x1080/2015/06/04/959070_pokemon-clouds-pixel-art_1920x1200_h.png");
+		font: 40pt Arial;
+		color: black;
+	}
+
+	#contentBox {
+		margin-top: 100px;
+	}
+		
+	#clickBox {
+		margin-top: 20px;
+		font: 20pt Arial;
+		border-radius: 30px;
+		width: 300px;
+		padding: 20px;
+	}
+		
+	#clickBox:hover{
+		color: white; 
+	}
+		
+	#inputBox{
+		margin-top: 10px;
+	}
+		
+	#buttonOne{
+		margin-top: 10px;
+	}
+
+</style>
+</head>
+<body>
+
+	<center><div id="contentBox">Hello there! Welcome to the world of Pokemon!</div></center>
+	<center><div id="clickBox" onclick="clickBox()">Click Here</div></center>
+	<center><input type="text" id="inputBox"><button onclick="processForm()" id="buttonOne">Enter</button></center>
+
+<script type="text/javascript">
+
+	var inputBox = document.getElementById('inputBox');
+	var a = document.getElementById('inputBox');
+		a.style.display = "none";
+	var b = document.getElementById('buttonOne');
+		b.style.display = "none";
+
+//global variables
+	var contentBox = document.getElementById('contentBox');
+	var inputValue;
+	var inputValue1;
+	var userName = inputValue;
+	var enemyName = inputValue1;
+	var enemyMove
+	var userHP = 100
+	var cpuHP = 100
+	var userEnergy = 10 
+	var cpuEnergy = 10
+	var fighting = true
+	var userDamage = 0
+	var enemyDamage = 0
+	var winner
+	var	enemySelect 
+	var gameOver
+
+	var step = 1;
+//click here button
+	function clickBox(){
+		if(step === 1){
+			document.getElementById('contentBox').innerHTML = "My name is Oak! Most people call me the Pokemon Prof!";
+			step +=1;
+		} else if(step === 2){
+			document.getElementById('contentBox').innerHTML = " This world is inhabited by creatures called Pokemon! For some people, Pokemon are pets. Others use them for fights. Myself...I study Pokemon as a profession.";
+			step +=1;
+		} else if(step === 3){
+			document.getElementById('contentBox').innerHTML = "First, what is your name?";
+			var x = document.getElementById("clickBox");
+				x.style.display = "none";
+			var a = document.getElementById('inputBox');
+				a.style.display = "block";
+			var b = document.getElementById('buttonOne');
+				b.style.display = "block";
+			step +=1;
+		} else if(step === 5) {
+			inputBox.value = "";
+			contentBox.innerHTML = "This is my grandson. He has been your rival since you were a baby. Erm... what is his name again?";
+			var x = document.getElementById("clickBox");
+				x.style.display = "none";	
+			var a = document.getElementById('inputBox');
+				a.style.display = "block";
+			var b = document.getElementById('buttonOne');
+				b.style.display = "block";
+			step +=1;
+		} else if(step === 7){
+			contentBox.innerHTML = " Your very own Pokemon legend is about to unfold! A world of dreams and adventures with Pokemon awaits! Let's go!"
+			step +=1;
+		} else if(step === 8){
+			contentBox.innerHTML = "First you need to choose your Pokemon."
+			step +=1;
+		} else if(step === 9){
+		//Change to buttons
+			inputBox.value = ""
+			contentBox.innerHTML = "Which Pokemon do you choose? <br>1) Bulbasaur <br>2) Squirtle <br>3) Charmander <br><br>Enter 1, 2, or 3"
+			var x = document.getElementById("clickBox");
+				x.style.display = "none";	
+			var a = document.getElementById('inputBox');
+				a.style.display = "block";
+			var b = document.getElementById('buttonOne');
+				b.style.display = "block";
+			var c = document.getElementById('buttonBulbasaur')
+			step +=1;
+		} else if(step === 12){
+			contentBox.innerHTML = 'After obtaining ' + Pokemon + " you leave Professor Oak's lab ";
+			var a = document.getElementById('inputBox');
+				a.style.display = "none";
+			var b = document.getElementById('buttonOne');
+				b.style.display = "none";
+			var x = document.getElementById("clickBox");
+				x.style.display = "block";
+			step +=1;
+		} else if(step === 13){
+			contentBox.innerHTML = 'Walking down the street you run into ' + enemyName + '!!';
+			var a = document.getElementById('inputBox');
+				a.style.display = "none";
+			var b = document.getElementById('buttonOne');
+				b.style.display = "none";
+			var x = document.getElementById("clickBox");
+				x.style.display = "block";
+			step +=1;
+		} else if(step === 14){
+			contentBox.innerHTML = enemyName + ": " + userName + ', so we meet again, and this early in our journeys. How about a friendly first battle?'
+			step +=1;
+		} else if(step === 15){
+			if(Pokemon === "Bulbasaur"){
+				enemyChoice = Math.floor(Math.random() * 2) 
+				if(enemyChoice === 1 ){
+					enemyPokemon = "Squirtle"
+				} else {
+					enemyPokemon = "Charmander"
+				}
+			} else if(Pokemon === "Squirtle"){
+				enemyChoice = Math.floor(Math.random() * 2) 
+				if(enemyChoice === 1){
+					enemyPokemon = "Bulbasaur"
+				} else {
+					enemyPokemon = "Charmander"
+				}
+			} else if(Pokemon === "Charmander"){
+				enemyChoice = Math.floor(Math.random() * 2) 
+				if(enemyChoice === 1){
+					enemyPokemon = "Bulbasaur"
+				} else {
+					enemyPokemon = "Squirtle"
+				}
+			} else if (Pokemon === "Picachu"){
+				enemyChoice = Math.floor(Math.random() * 3) 
+				if(enemyChoice === 1){
+					enemyPokemon = "Bulbasaur"
+				} else if(enemyChoice === 2) {
+					enemyPokemon = "Squirtle"
+				} else {
+					enemyPokemon = "Charmander"
+				}
+			}
+			console.log(enemyPokemon)
+			contentBox.innerHTML = enemyName + ': I choose you ' + enemyPokemon;
+			step +=1;
+		} else if(step === 16){
+			contentBox.innerHTML = enemyName + " sent out " + enemyPokemon;
+			step +=1;
+		} else if(step === 17){
+			contentBox.innerHTML = "You sent out" + " " + Pokemon;
+			step +=1;
+		} else if(step === 18){
+			contentBox.innerHTML = Pokemon + " has " + userEnergy + " energy and " + userHP + " HP."
+			step +=1;
+		} else if(step === 19){
+			if(Pokemon === "Bulbasaur"){
+				contentBox.innerHTML = "What move will " + Pokemon + " use? Avalible moves: <br>1) Tackle <br> A full-body charge attack. Does 0-10 damage. <br>2) Vine Whip <br> The enemy is struck with slender, whiplike vines to inflict damage. Does 0-20 damage. <br>3) Recharge <br> Pokemon gains 5 energy <br><br>Enter 1, 2, or 3"
+			} else if(Pokemon === "Squirtle"){
+				contentBox.innerHTML ="What move will " + Pokemon + " use? Avalible moves: <br>1) Tail Whip <br> The enemy is struck by the Pokemon's tail to inflict damage. Does 0-10 damage. <br>2) Water Gun <br> The foe is struck with a lot of water expelled forcibly from the mouth. Does 0-20 damage. <br>3) Recharge <br> Pokemon gains 5 energy <br><br>Enter 1, 2, or 3"
+			} else if(Pokemon === "Charmander"){
+				contentBox.innerHTML = "What move will " + Pokemon + " use? Avalible moves: <br>1) Scratch <br> Scratches the target with sharp claws. Does 0-10 damage <br>2) Ember <br>The target is attacked with small flames. Does 0-20 damage. <br>3) Recharge <br> Pokemon gains 5 energy <br>Enter 1, 2, or 3"
+			} else if (Pokemon === "Picachu"){
+				contentBox.innerHTML = "What move will " + Pokemon + " use? Avalible moves: <br>1) Quick Attack<br> An almost invisibly fast attack that is certain to strike. Does 0-10 damage. <br>2) Thunder Shock <br> A jolt of electricity is hurled at the foe to inflict damage. Does 0-20 damage. <br>3) Recharge<br> Pokemon gains 5 energy <br>Enter 1, 2, or 3"			 
+			}
+			inputBox.value = ""
+			var x = document.getElementById("clickBox");
+				x.style.display = "none";	
+			var a = document.getElementById('inputBox');
+				a.style.display = "block";
+			var b = document.getElementById('buttonOne');
+				b.style.display = "block";
+			step +=1;
+		} else if(step === 21){
+			if(cpuEnergy < 5){
+				enemySelect = 3	
+			} else {
+				if(enemyPokemon === "Bulbasaur"){
+					var enemySelect = Math.ceil(Math.random() *2 ) 
+					if(enemySelect === 1){
+						var enemyMove = "Tackle"
+					} else if(enemySelect === 2){
+						enemyMove = "Vine Whip"
+					} 			
+				} else if(enemyPokemon === "Squirtle"){
+					enemySelect = Math.ceil(Math.random() *2 ) 
+					if(enemySelect === 1){
+						enemyMove = "Tail Whip"
+					} else if(enemySelect === 2){
+						enemyMove = "Water Gun"
+					} 
+				} else if(enemyPokemon === "Charmander"){
+				enemySelect = Math.ceil(Math.random() *2)
+					if(enemySelect === 1){
+						enemyMove = "Scratch"
+					} else if(enemySelect === 2){
+						enemyMove = "Ember"
+					} 
+				} else if(enemyPokemon === "Picachu"){
+					enemySelect = Math.ceil(Math.random() *2)
+					if(enemySelect === 1){
+						enemyMove = "Quick Attack"
+					} else if(enemySelect === 2){
+						enemyMove = "Thunder Shock"
+					} 
+				} 
+			}
+			if(enemySelect == 1 || enemySelect == 2 ){
+				if(enemySelect === 1){
+					var enemyDamage = Math.ceil(Math.random() * 10)
+				} else if(enemySelect === 2){
+					enemyDamage = Math.ceil(Math.random() * 20)
+				} 
+				cpuEnergy = cpuEnergy - 5
+				userHP = userHP - enemyDamage
+				contentBox.innerHTML = enemyMove + " did " + enemyDamage + " damage! " + Pokemon + " has " + userHP + " HP left"
+				step -=2;
+			} 
+			if (enemySelect == 3){
+				cpuEnergy = cpuEnergy + 5
+				contentBox.innerHTML = enemyPokemon + " gained 5 energy. " + enemyPokemon + " now has " + cpuEnergy + " energy!"
+				step -=2;
+			}
+			if(userHP < 1){
+				userHP = 0
+				step = gameOver
+				winner = enemyPokemon	
+			}
+		} else if(step === 30){
+			console.log(winner)
+			if(winner === enemyPokemon){
+				contentBox.innerHTML = "You lost. " + enemyPokemon + " won the battle. Do you want to play again?"
+			} else if(winner === Pokemon){
+				contentBox.innerHTML = "You defeated " + enemyPokemon + ". Congrats!! Do you want to play again?"
+			}
+			step +=1
+		} 
+	} 
+	if(step === 31){
+
+	}
+//textbox enter button
+	var processForm = function(){
+		var inputValue = inputBox.value;
+		if(step === 4){
+			var inputValue = inputBox.value;
+				userName = inputValue;
+			contentBox.innerHTML = "Right! So your name is " + userName + ".";
+			var a = document.getElementById('inputBox');
+				a.style.display = "none";
+			var b = document.getElementById('buttonOne');
+				b.style.display = "none";
+			var x = document.getElementById("clickBox");
+				x.style.display = "block";
+			step +=1;
+		} else if(step === 6){
+			var inputValue1 = inputBox.value;
+				enemyName = inputValue1
+			contentBox.innerHTML = "That is right! I remember now! His name is " + enemyName + ".";
+			var a = document.getElementById('inputBox');
+				a.style.display = "none";
+			var b = document.getElementById('buttonOne');
+				b.style.display = "none";
+			var x = document.getElementById("clickBox");
+				x.style.display = "block";
+			step +=1;
+		} else if(step === 10){
+			if(inputValue === '1' ){
+				Pokemon = "Bulbasaur"
+			} else if (inputValue === '2' ) {
+				Pokemon = "Squirtle"
+			} else if (inputValue === '3') {
+				Pokemon = "Charmander"
+			} else {
+				Pokemon = "Pikachu"
+			}
+			step +=1;
+		} else if(step === 11){
+			contentBox.innerHTML = 'You have choosen ' + Pokemon + ".";
+			var a = document.getElementById('inputBox');
+				a.style.display = "none";
+			var b = document.getElementById('buttonOne');
+				b.style.display = "none";
+			var x = document.getElementById("clickBox");
+				x.style.display = "block";
+			step +=1;
+		} else if(step === 20){
+			var inputValue2 = inputBox.value;
+			var x = document.getElementById("clickBox");
+				x.style.display = "block";	
+			var a = document.getElementById('inputBox');
+				a.style.display = "none";
+			var b = document.getElementById('buttonOne');
+				b.style.display = "none";
+			if(Pokemon === "Bulbasaur"){
+				if(inputValue2 === '1'){
+					var userMove = "Tackle"
+				} else if(inputValue2 === '2'){
+					userMove = "Vine Whip"
+				} else if(inputValue2 === '3'){
+					userMove = "Recharge"
+				}
+			} else if(Pokemon === "Squirtle"){
+				if(inputValue2 === '1'){
+					userMove = "Tail Whip"
+				} else if(inputValue2 === '2'){
+					userMove = "Water Gun"
+				} else if(inputValue2 === '3'){
+					userMove = "Recharge"
+				}
+			} else if(Pokemon === "Charmander"){
+				if(inputValue2 === '1'){
+					userMove = "Scratch"
+				} else if(inputValue2 === '2'){
+					userMove = "Ember"
+				} else if(inputValue2 === '3'){
+					userMove = "Recharge"
+				}
+			} else if (Pokemon === "Picachu"){
+				if(inputValue2 === '1'){
+					userMove = "Quick Attack"
+				} else if(inputValue2 === '2'){
+					userMove = "Thunder Shock"
+				} else if(inputValue2 === '3'){
+					userMove = "Recharge"
+				}
+			} 
+			if(inputValue2 === '1' || inputValue2 === '2'){
+				if(inputValue2 === '1'){
+					userDamage = Math.ceil(Math.random() * 10)
+					userEnergy = userEnergy - 2
+				} else if(inputValue2 === '2'){
+					userDamage = Math.ceil(Math.random() * 20)
+					userEnergy = userEnergy - 5
+				} 
+				cpuHP = cpuHP - userDamage
+				if(cpuHP < 1){
+					cpuHP = 0
+					fighting = false
+					winner = Pokemon
+				}
+				contentBox.innerHTML = userMove + " did " + userDamage + " damage! " + enemyPokemon + " has " + cpuHP + " HP left"	
+				step +=1;
+			} 
+			if(inputValue2 == 3){
+				userEnergy = userEnergy + 5
+				contentBox.innerHTML = Pokemon + " now has " + userEnergy + " energy!"
+				step +=1
+			}
+			if(cpuHP < 1){
+				cpuHP = 0
+				step = 30
+				winner = Pokemon
+			}
+		} 
+	}   
+
+
+
+</script>
+</body>
+</html>
